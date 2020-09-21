@@ -51,7 +51,9 @@ class fast5Index():
         elif index_file:
             with open(index_file, 'r') as fp:
                 self.index_dict = {id:path for path,id in [line.split('\t') for line in fp.read().split('\n') if line]}
-            self.index_dir = os.path.dirname(index_file)
+            self.index_dir = '.'
+            print('hello')
+            print(self.index_dir)
         else:
             self.index_dict = None
 

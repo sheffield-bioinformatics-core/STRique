@@ -873,6 +873,7 @@ def parse_config(repeat_config_file, param_config_file=None):
 # main class
 class main():
     def __init__(self):
+        signal(SIGPIPE, SIG_DFL)
         parser = argparse.ArgumentParser(
         description='STRique: a nanopore raw signal repeat detection pipeline',
         usage='''STRique.py <command> [<args>]
@@ -898,6 +899,7 @@ Available commands are:
         args = parser.parse_args(argv)
         for record in fast5Index.fast5Index.index(args.input, recursive=args.recursive, output_prefix=args.out_prefix, tmp_prefix=args.tmp_prefix):
             print(record)
+        exit(0)
 
     def count(self, argv):
         # command line
@@ -944,6 +946,7 @@ Available commands are:
                     sam_queue.put({'sam_line': line})
         mt.close()
         logger.close()
+        exit(0)
 
     def plot(self, argv):
         parser = argparse.ArgumentParser(description="Signal plots over STR expansions")
@@ -1024,7 +1027,4 @@ Available commands are:
         exit(0)
 
 
-# main
-if __name__ == '__main__':
-    signal(SIGPIPE,SIG_DFL)
-    main()
+

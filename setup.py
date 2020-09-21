@@ -40,7 +40,7 @@ import subprocess
 from setuptools import setup, Extension, find_packages
 from setuptools.command.build_ext import build_ext
 from distutils.version import LooseVersion
-from STRique import __version__, _program
+from strique import __version__, _program
 
 class CMakeExtension(Extension):
     def __init__(self, name, sourcedir=''):
@@ -96,15 +96,15 @@ setup(
     author_email='giesselmann@molgen.mpg.de',
     description='Nanopore raw signal repeat detection',
     long_description='',
-    packages=find_packages(),
-    scripts=['STRique/scripts/STRique.py'],
+    packages=['strique','STRique_lib'],
+    scripts=['strique/scripts/STRique.py'],
     ext_modules=[CMakeExtension('STRique_lib.pyseqan')],
     cmdclass=dict(build_ext=CMakeBuild),
     python_requires='>=3.5',
     zip_safe=False,
     entry_points="""
     [console_scripts]
-    {program} = STRique.STRique:main
+    {program} = strique.strique:main
     """.format(program=_program),
     include_package_data=True,
 )

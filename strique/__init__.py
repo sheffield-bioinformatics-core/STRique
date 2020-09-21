@@ -1,2 +1,2 @@
-_program = "STRique"
+_program = "strique"
 __version__ = "sbc0.0.1"
